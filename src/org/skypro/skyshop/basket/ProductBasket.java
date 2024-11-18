@@ -56,7 +56,6 @@ public class ProductBasket {
             System.out.println("Этого нет в корзине");
             return false;
         }
-
         public void clearBasket() {
             System.out.println("Очистка корзины!");
             Arrays.fill(basket, null);

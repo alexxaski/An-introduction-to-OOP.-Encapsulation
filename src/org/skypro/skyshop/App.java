@@ -36,7 +36,6 @@ public class App {
 
         basket1.addProduct(new Product("салат", 112));
 
-
         basket1.clearBasket();
     }
 }
