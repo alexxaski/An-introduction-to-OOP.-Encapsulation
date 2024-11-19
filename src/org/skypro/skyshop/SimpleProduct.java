@@ -10,7 +10,6 @@ class SimpleProduct extends Product {
          super(productName);
          this.price = price;
      }
-
      @Override
      public int getPrice() {
          return price;

@@ -12,7 +12,6 @@ public abstract class Product {
     public String getProductName() {
         return productName;
     }
-
     public abstract int getPrice();
     public abstract boolean isSpecial();
 
