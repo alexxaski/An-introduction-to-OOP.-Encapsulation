@@ -2,11 +2,11 @@ package org.skypro.skyshop.product;
 
 public abstract class Product {
     public final String productName ;
-   // final   int price;
+   protected    int price;
 
-    public Product(String productName ){
+    public Product(String productName, int price ){
         this.productName = productName;
-     //   this.price = price;
+        this.price = price;
     }
 
     public String getProductName() {

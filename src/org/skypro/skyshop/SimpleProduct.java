@@ -7,7 +7,7 @@ class SimpleProduct extends Product {
 
 
      public SimpleProduct(String productName, int price) {
-         super(productName);
+         super(productName,price);
          this.price = price;
      }
      @Override

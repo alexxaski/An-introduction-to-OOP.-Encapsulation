@@ -4,9 +4,9 @@ import org.skypro.skyshop.product.Product;
 class FixPriceProduct extends Product {
     private static final int FIXED_PRICE = 50;
 
-   public FixPriceProduct(String productName,int price ) {
+   public FixPriceProduct(String productName) {
 
-       super(productName);
+       super(productName, FIXED_PRICE);
 
     }
         @Override

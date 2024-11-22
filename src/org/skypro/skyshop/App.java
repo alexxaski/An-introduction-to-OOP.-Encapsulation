@@ -14,29 +14,31 @@ public class App {
             basket.addProduct(new SimpleProduct("Колбаса", 129));
         basket.countingSpecialItems();
         System.out.println("Общая стоимость корзины: " + basket.calculateBasketCost() + " рублей");
-        basket.printBasket();
 
-        basket.isThereProduct("Пиво");
-        basket.isThereProduct("Молоко");
 
-        basket.clearBasket();
-        basket.printBasket();
+        basket.containsProduct("Пиво");
+        basket.containsProduct("Молоко");
+
+
+
         System.out.println("Общая стоимость корзины: " + basket.calculateBasketCost() + " рублей.");
-        basket.isThereProduct("Сыр");
+        basket.containsProduct("Сыр");
 
         ProductBasket basket1 = new ProductBasket();
 
         basket1.addProduct(new SimpleProduct("помидоры", 98));
         basket1.addProduct(new SimpleProduct("огурцы", 65));
-        basket1.addProduct(new FixPriceProduct("лук", 42));
+        basket1.addProduct(new FixPriceProduct("лук"));
         basket1.addProduct(new DiscountedProduct("майонез", 120,10));
         basket1.addProduct(new SimpleProduct("соль", 32));
+
         basket1.countingSpecialItems();
         System.out.println("Общая стоимость корзины: " + basket1.calculateBasketCost() + " рублей.");
 
         basket1.addProduct(new SimpleProduct("салат", 112));
 
         basket1.clearBasket();
+
 
     }
 
