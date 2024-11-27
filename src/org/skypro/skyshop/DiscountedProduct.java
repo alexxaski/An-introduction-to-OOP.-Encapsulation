@@ -24,6 +24,7 @@ public class DiscountedProduct extends Product {
     public String toString() {
         return productName + ": " + getPrice();
     }
+
     }
 
 

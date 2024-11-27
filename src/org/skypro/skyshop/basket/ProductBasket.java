@@ -1,7 +1,5 @@
 package org.skypro.skyshop.basket;
-
 import org.skypro.skyshop.product.Product;
-
 import java.util.Arrays;
 public class ProductBasket {
     private Product[] basket;

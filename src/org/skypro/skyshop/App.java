@@ -1,5 +1,4 @@
 package org.skypro.skyshop;
-
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.Product;

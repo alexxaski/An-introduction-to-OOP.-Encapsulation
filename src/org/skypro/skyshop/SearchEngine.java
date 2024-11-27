@@ -11,7 +11,6 @@ public class SearchEngine {
             if (searchableObjects[i] == null) {
                 searchableObjects[i] = searchable;
                 break;
-
             }
         }
     }
