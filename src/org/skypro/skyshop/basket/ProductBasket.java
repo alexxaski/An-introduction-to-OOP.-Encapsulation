@@ -1,9 +1,6 @@
 package org.skypro.skyshop.basket;
-
 import org.skypro.skyshop.product.Product;
-
 import java.util.Arrays;
-
 public class ProductBasket {
     private Product[] basket;
     private int counter;
@@ -28,8 +25,6 @@ public class ProductBasket {
 
                 sum += basket[i].getPrice();
                // System.out.println("Итого: " + calculateBasketCost());
-
-
         }
         return sum;
     }
@@ -80,6 +75,7 @@ public class ProductBasket {
         }
         if (counter == 0) {
             System.out.println("Корзина пуста!");
+
         }
     }
 }
