@@ -42,7 +42,18 @@ public class App {
 
         basket1.addProduct(new SimpleProduct("салат", 112));
 */
+        try {
+            Product invalidProduct = new SimpleProduct("", -5); // Создание продукта с неправильными данными
+        } catch (IllegalArgumentException e) {
+            System.out.println("Произошла ошибка: " + e.getMessage());
+        }
 
+        try {
+            Product invalidProduct = new DiscountedProduct("Apple", 50, 120); // Создание продукта с неправильными данными
+        } catch (IllegalArgumentException e) {
+            System.out.println("Произошла ошибка: " + e.getMessage());
+        }
+        /*
         Product product1 = new SimpleProduct("Milk",1);
         Product product2 = new SimpleProduct("Bread",2);
         Product product3 = new SimpleProduct("Cheese",3);
@@ -60,8 +71,6 @@ public class App {
         Searchable[] searchResults = searchEngine.toArray(new Searchable[0]);
         System.out.println("Search Results:");
         System.out.println(Arrays.toString(searchResults));
-/*Нужна помощь и прям с объяснениями , работают не все выводы
-и такое чувство ,что че то я не понял от слова совсем.
- */
+         */
     }
 }

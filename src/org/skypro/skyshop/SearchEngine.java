@@ -6,6 +6,7 @@ public class SearchEngine {
     public SearchEngine(int size) {
         this.searchableObjects = new Searchable[size];
     }
+
     public void add(Searchable searchable) {
         for (int i = 0; i < searchableObjects.length; i++) {
             if (searchableObjects[i] == null) {
@@ -29,4 +30,29 @@ public class SearchEngine {
         }
         return results;
     }
+
+    public Searchable findMostSuitable(String search) {
+        Searchable mostSuitable = null;
+        int maxCount = 0;
+
+        for (Searchable obj : searchableObjects) {
+            if (obj != null) {
+                String searchTerm = obj.getSearchTerm();
+                int count = 0;
+                int fromIndex = 0;
+
+                while ((fromIndex = searchTerm.indexOf(search, fromIndex)) != -1) {
+                    count++;
+                    fromIndex += search.length();
+                }
+
+                if (count > maxCount) {
+                    maxCount = count;
+                    mostSuitable = obj;
+                }
+            }
+        }
+        return mostSuitable;
+    }
 }
+

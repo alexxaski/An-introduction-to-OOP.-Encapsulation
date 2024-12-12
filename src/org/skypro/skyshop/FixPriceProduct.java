@@ -1,5 +1,4 @@
 package org.skypro.skyshop;
-
 import org.skypro.skyshop.product.Product;
 
 class FixPriceProduct extends Product {
