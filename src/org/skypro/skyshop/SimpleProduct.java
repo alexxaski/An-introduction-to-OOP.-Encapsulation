@@ -15,6 +15,7 @@ class SimpleProduct extends Product {
      public int getPrice() {
          return price;
      }
+
     @Override
     public boolean isSpecial() {
         return false;

@@ -26,12 +26,10 @@ public class DiscountedProduct extends Product {
     public boolean isSpecial() {
         return true; // Простой товар не является специальным
     }
-
     @Override
     public String toString() {
         return productName + ": " + getPrice();
     }
-
     }
 
 

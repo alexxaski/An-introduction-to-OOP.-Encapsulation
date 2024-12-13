@@ -2,7 +2,6 @@ package org.skypro.skyshop.basket;
 import org.skypro.skyshop.BestResultNotFound;
 import org.skypro.skyshop.Searchable;
 import org.skypro.skyshop.product.Product;
-import java.util.Arrays;
 import java.util.Stack;
 
 public class ProductBasket {
@@ -12,22 +11,19 @@ public class ProductBasket {
     public ProductBasket() {
         this.basket = new Product[5];
     }
+
     public void addProduct(Product product) {
         if (counter >= basket.length) {
             throw new IndexOutOfBoundsException("Невозможно добавить продукт");
         }
-        //String productName = product.getProductName();
-        //int price = product.getPrice();
         basket[counter++] = product;
         System.out.println(product);
     }
 
     public int calculateBasketCost() {
         int sum = 0;
-        for (int i = 0 ; i < counter ; i++) {
-
-                sum += basket[i].getPrice();
-               // System.out.println("Итого: " + calculateBasketCost());
+        for (int i = 0; i < counter; i++) {
+            sum += basket[i].getPrice();
         }
         return sum;
     }
@@ -58,7 +54,6 @@ public class ProductBasket {
 
     public void clearBasket() {
         System.out.println("Очистка корзины!");
-       // Arrays.fill(basket, null);
         basket = new Product[basket.length];
     }
 
@@ -78,9 +73,9 @@ public class ProductBasket {
         }
         if (counter == 0) {
             System.out.println("Корзина пуста!");
-
         }
     }
+
     public Searchable findMostSuitableItem(String search) throws BestResultNotFound {
         Searchable mostSuitable = null;
         int maxCount = 0;
@@ -111,11 +106,6 @@ public class ProductBasket {
         if (mostSuitable == null) {
             throw new BestResultNotFound("Нет подходящего объекта для поискового запроса: " + search);
         }
-
         return mostSuitable;
     }
 }
-
-
-
-

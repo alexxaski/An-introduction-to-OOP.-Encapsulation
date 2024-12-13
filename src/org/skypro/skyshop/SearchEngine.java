@@ -15,7 +15,6 @@ public class SearchEngine {
             }
         }
     }
-
     public Searchable[] search(String searchTerm) {
         Searchable[] results = new Searchable[5];
         int count = 0;
