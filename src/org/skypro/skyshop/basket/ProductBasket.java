@@ -1,49 +1,45 @@
 package org.skypro.skyshop.basket;
-import org.skypro.skyshop.BestResultNotFound;
-import org.skypro.skyshop.Searchable;
+
+import org.skypro.skyshop.notFoundAndSedrch.BestResultNotFound;
+import org.skypro.skyshop.notFoundAndSedrch.Searchable;
 import org.skypro.skyshop.product.Product;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class ProductBasket {
-    private Product[] basket;
-    private int counter;
-
-    public ProductBasket() {
-        this.basket = new Product[5];
-    }
+    private List<Product> basket = new ArrayList<>();
 
     public void addProduct(Product product) {
-        if (counter >= basket.length) {
-            throw new IndexOutOfBoundsException("Невозможно добавить продукт");
-        }
-        basket[counter++] = product;
+        basket.add(product);
         System.out.println(product);
     }
 
     public int calculateBasketCost() {
         int sum = 0;
-        for (int i = 0; i < counter; i++) {
-            sum += basket[i].getPrice();
+        for (Product product : basket) {
+            sum += product.getPrice();
         }
         return sum;
     }
 
     public void printBasket() {
-        if (counter == 0) {
+        if (basket.isEmpty()) {
             System.out.println("Корзина пуста!");
             return;
         }
         int sum = 0;
-        for (int i = 0; i < counter; i++) {
-            System.out.println(basket[i]);
-            sum += basket[i].getPrice();
+        for (Product product : basket) {
+            System.out.println(product);
+            sum += product.getPrice();
         }
         System.out.println("Итого: " + sum);
     }
 
     public boolean containsProduct(String productName) {
-        for (int i = 0; i < counter; i++) {
-            if (basket[i] != null && productName.equalsIgnoreCase(basket[i].getProductName())) {
+        for (Product product : basket) {
+            if (product != null && productName.equalsIgnoreCase(product.getProductName())) {
                 System.out.println("Этот товар есть в корзине");
                 return true;
             }
@@ -54,24 +50,24 @@ public class ProductBasket {
 
     public void clearBasket() {
         System.out.println("Очистка корзины!");
-        basket = new Product[basket.length];
+        basket.clear();
     }
 
     public void countingSpecialItems() {
         int specialCount = 0;
-        for (int i = 0; i < counter; i++) {
-            if (basket[i] != null && basket[i].isSpecial()) {
+        for (Product product : basket) {
+            if (product != null && product.isSpecial()) {
                 specialCount++;
-                System.out.println(basket[i].getProductName() + ": " + basket[i].getPrice() + " (Специальный товар)");
+                System.out.println(product.getProductName() + ": " + product.getPrice() + " (Специальный товар)");
             } else {
-                System.out.println(basket[i]);
+                System.out.println(product);
             }
         }
         System.out.println("Специальных товаров: " + specialCount);
         if (specialCount == 0) {
             System.out.println("Специальных товаров нет");
         }
-        if (counter == 0) {
+        if (basket.isEmpty()) {
             System.out.println("Корзина пуста!");
         }
     }
@@ -82,8 +78,8 @@ public class ProductBasket {
 
         Stack<Searchable> searchEngine = new Stack<>();
         for (Product product : basket) {
-            if (product != null) {
-                searchEngine.add(product);
+            if (product instanceof Searchable) {
+                searchEngine.add((Searchable) product);
             }
         }
 
@@ -108,4 +104,16 @@ public class ProductBasket {
         }
         return mostSuitable;
     }
+    public List<Product> removeProductsByName(String productName) {
+        List<Product> removedProducts = new ArrayList<>();
+        basket.removeIf(product -> {
+            if (product.getProductName().equalsIgnoreCase(productName)) {
+                removedProducts.add(product);
+                return true;
+            }
+            return false;
+        });
+        return removedProducts;
+    }
+
 }

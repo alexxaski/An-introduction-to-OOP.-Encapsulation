@@ -1,4 +1,4 @@
-package org.skypro.skyshop;
+package org.skypro.skyshop.notFoundAndSedrch;
 
 public class BestResultNotFound extends Exception {
     public BestResultNotFound(String message) {
