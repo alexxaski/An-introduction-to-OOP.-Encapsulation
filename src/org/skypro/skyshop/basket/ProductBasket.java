@@ -1,6 +1,9 @@
 package org.skypro.skyshop.basket;
+import org.skypro.skyshop.BestResultNotFound;
+import org.skypro.skyshop.Searchable;
 import org.skypro.skyshop.product.Product;
-import java.util.Arrays;
+import java.util.Stack;
+
 public class ProductBasket {
     private Product[] basket;
     private int counter;
@@ -13,18 +16,14 @@ public class ProductBasket {
         if (counter >= basket.length) {
             throw new IndexOutOfBoundsException("Невозможно добавить продукт");
         }
-        //String productName = product.getProductName();
-        //int price = product.getPrice();
         basket[counter++] = product;
         System.out.println(product);
     }
 
     public int calculateBasketCost() {
         int sum = 0;
-        for (int i = 0 ; i < counter ; i++) {
-
-                sum += basket[i].getPrice();
-               // System.out.println("Итого: " + calculateBasketCost());
+        for (int i = 0; i < counter; i++) {
+            sum += basket[i].getPrice();
         }
         return sum;
     }
@@ -55,7 +54,6 @@ public class ProductBasket {
 
     public void clearBasket() {
         System.out.println("Очистка корзины!");
-       // Arrays.fill(basket, null);
         basket = new Product[basket.length];
     }
 
@@ -75,11 +73,39 @@ public class ProductBasket {
         }
         if (counter == 0) {
             System.out.println("Корзина пуста!");
-
         }
     }
+
+    public Searchable findMostSuitableItem(String search) throws BestResultNotFound {
+        Searchable mostSuitable = null;
+        int maxCount = 0;
+
+        Stack<Searchable> searchEngine = new Stack<>();
+        for (Product product : basket) {
+            if (product != null) {
+                searchEngine.add(product);
+            }
+        }
+
+        for (Searchable searchable : searchEngine) {
+            String searchTerm = searchable.getSearchTerm();
+            int count = 0;
+            int fromIndex = 0;
+
+            while ((fromIndex = searchTerm.indexOf(search, fromIndex)) != -1) {
+                count++;
+                fromIndex += search.length();
+            }
+
+            if (count > maxCount) {
+                maxCount = count;
+                mostSuitable = searchable;
+            }
+        }
+
+        if (mostSuitable == null) {
+            throw new BestResultNotFound("Нет подходящего объекта для поискового запроса: " + search);
+        }
+        return mostSuitable;
+    }
 }
-
-
-
-

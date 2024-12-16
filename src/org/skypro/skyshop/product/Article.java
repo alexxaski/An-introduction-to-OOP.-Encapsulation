@@ -1,5 +1,4 @@
 package org.skypro.skyshop.product;
-
 import org.skypro.skyshop.Searchable;
 
 public class Article implements Searchable {
@@ -24,6 +23,5 @@ public class Article implements Searchable {
     @Override
     public String getObjectName() {
         return title;
-
     }
 }

@@ -1,5 +1,4 @@
 package org.skypro.skyshop;
-
 import org.skypro.skyshop.product.Product;
 
 class FixPriceProduct extends Product {
@@ -13,7 +12,6 @@ class FixPriceProduct extends Product {
         public int getPrice () {
             return FIXED_PRICE;
         }
-
     @Override
     public boolean isSpecial() {
         return true;
