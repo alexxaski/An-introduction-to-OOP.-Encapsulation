@@ -5,6 +5,7 @@ public class DiscountedProduct extends Product {
     private int basePrice; // Базовая цена
     private int discountPercentage; // Скидка в процентах
 
+
     public DiscountedProduct(String productName, int basePrice, int discountPercentage) {
         super(productName);
         if (basePrice <= 0) {

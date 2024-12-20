@@ -11,7 +11,6 @@ import org.skypro.skyshop.notFoundAndSedrch.Searchable;
         }
         this.productName = productName;
     }
-
     public String getProductName() {
         return productName;
     }

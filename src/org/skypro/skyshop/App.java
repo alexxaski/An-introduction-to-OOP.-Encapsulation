@@ -5,8 +5,9 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.searchEngine.SearchEngine;
 import org.skypro.skyshop.notFoundAndSedrch.Searchable;
+
 import java.util.List;
-import java.util.Stack;
+import java.util.Map;
 
 public class App {
 
@@ -38,19 +39,19 @@ public class App {
         // Демонстрация работы с SearchEngine
         SearchEngine searchEngine = new SearchEngine();
 
-
         String searchTerm = "Apple";
 
-        List<Searchable> searchResults = searchEngine.search(searchTerm);
-        System.out.println("Результаты поиска по запросу '" + searchTerm + "':");
-        for (Searchable result : searchResults) {
-            System.out.println(result.getObjectName());
+        Map<String, Searchable> searchResults = searchEngine.search(searchTerm);
+        System.out.println(" поиск '" + searchTerm + "':");
+        for (Map.Entry<String, Searchable> entry : searchResults.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue().getSearchTerm());
         }
 
-        List<Searchable> suitableResults = searchEngine.search("Apple");
-        System.out.println("Подходящие результаты для запроса 'Apple':");
-        for (Searchable result : suitableResults) {
-            System.out.println(result.getObjectName());
+        Map<String, Searchable> suitableResults = searchEngine.search("Apple");
+        System.out.println(" результат поиска 'Apple':");
+        for (Map.Entry<String, Searchable> entry2 : suitableResults.entrySet()) {
+            System.out.println(entry2.getKey() + ": " + entry2.getValue().getSearchTerm());
         }
     }
 }
+
