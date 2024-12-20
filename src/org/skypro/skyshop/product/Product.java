@@ -1,5 +1,5 @@
 package org.skypro.skyshop.product;
-import org.skypro.skyshop.Searchable;
+import org.skypro.skyshop.notFoundAndSedrch.Searchable;
 
   public abstract class Product implements Searchable{
     public final String productName ;
