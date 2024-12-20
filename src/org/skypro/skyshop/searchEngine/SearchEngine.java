@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class SearchEngine {
+
     private List<Searchable> searchableObjects = new ArrayList<>();
 
     public void add(Searchable searchable) {

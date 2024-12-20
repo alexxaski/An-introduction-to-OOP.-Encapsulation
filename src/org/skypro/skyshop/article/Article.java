@@ -4,7 +4,6 @@ import org.skypro.skyshop.notFoundAndSedrch.Searchable;
 public class Article implements Searchable {
     private String title;
     private String content;
-
     public Article(String title, String content) {
         this.title = title;
         this.content = content;

@@ -5,7 +5,6 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.searchEngine.SearchEngine;
 import org.skypro.skyshop.notFoundAndSedrch.Searchable;
-
 import java.util.List;
 import java.util.Map;
 
