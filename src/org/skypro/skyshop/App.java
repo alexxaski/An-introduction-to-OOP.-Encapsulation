@@ -8,6 +8,7 @@ import org.skypro.skyshop.notFoundAndSedrch.Searchable;
 import java.util.List;
 import java.util.Map;
 
+
 public class App {
 
     public static void main(String[] args) {
