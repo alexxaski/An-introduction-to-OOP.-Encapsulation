@@ -1,5 +1,4 @@
 package org.skypro.skyshop.searchEngine;
-
 import org.skypro.skyshop.notFoundAndSedrch.Searchable;
 import java.util.ArrayList;
 import java.util.List;
