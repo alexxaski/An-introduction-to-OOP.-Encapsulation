@@ -2,48 +2,31 @@ package org.skypro.skyshop.searchEngine;
 
 import org.skypro.skyshop.notFoundAndSedrch.Searchable;
 
-import java.util.*;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Comparator;
 
 public class SearchEngine {
-    private Set<Searchable> searchableObjects = new HashSet<>();
+    private Set<Searchable> searchableObjects = new TreeSet<>(new SearchableComparator());
 
     public void add(Searchable searchable) {
         searchableObjects.add(searchable);
     }
 
     public Set<Searchable> search(String searchTerm) {
-        Set<Searchable> results = new TreeSet<>(new Comparator<Searchable>() {
-            @Override
-            public int compare(Searchable s1, Searchable s2) {
-                int lenDiff = s2.getObjectName().length() - s1.getObjectName().length();
-                if (lenDiff != 0) {
-                    return lenDiff;
-                } else {
-                    return s1.getObjectName().compareTo(s2.getObjectName());
-                }
-            }
-        });
+        Set<Searchable> results = new TreeSet<>(new SearchableComparator());
 
         for (Searchable obj : searchableObjects) {
             if (obj != null && obj.getSearchTerm().contains(searchTerm)) {
                 results.add(obj);
             }
         }
+
         return results;
     }
 
     public Set<Searchable> findMostSuitable(String search) {
-        Set<Searchable> suitableResults = new TreeSet<>(new Comparator<Searchable>() {
-            @Override
-            public int compare(Searchable s1, Searchable s2) {
-                int lenDiff = s2.getObjectName().length() - s1.getObjectName().length();
-                if (lenDiff != 0) {
-                    return lenDiff;
-                } else {
-                    return s1.getObjectName().compareTo(s2.getObjectName());
-                }
-            }
-        });
+        Set<Searchable> suitableResults = new TreeSet<>(new SearchableComparator());
 
         int maxCount = 0;
         for (Searchable obj : searchableObjects) {
@@ -64,6 +47,7 @@ public class SearchEngine {
                 }
             }
         }
+
         return suitableResults;
     }
 }

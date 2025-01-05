@@ -1,6 +1,5 @@
 package org.skypro.skyshop.notFoundAndSedrch;
 
-
 public interface Searchable {
 
     String getSearchTerm();
