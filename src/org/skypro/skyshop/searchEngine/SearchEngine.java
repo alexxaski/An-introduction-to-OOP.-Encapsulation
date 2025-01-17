@@ -1,9 +1,15 @@
 package org.skypro.skyshop.searchEngine;
+
 import org.skypro.skyshop.notFoundAndSedrch.Searchable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.function.Supplier;
+import java.util.AbstractMap;
+import java.util.stream.Collectors;
+
 
 public class SearchEngine {
 
@@ -14,40 +20,40 @@ public class SearchEngine {
     }
 
     public Map<String, Searchable> search(String searchTerm) {
-        Map<String, Searchable> results = new TreeMap<>();
-        for (Searchable obj : searchableObjects) {
-            if (obj != null && obj.getSearchTerm().contains(searchTerm)) {
-                results.put(obj.getObjectName(), obj);
-            }
-        }
-        return results;
+        return searchableObjects.stream()
+                .filter(obj -> obj != null && obj.getSearchTerm().contains(searchTerm))
+                .collect(Collectors.toMap(Searchable::getObjectName, obj -> obj, (existing, replacement) -> existing, TreeMap::new));
     }
 
     public List<Searchable> findMostSuitable(String search) {
-        List<Searchable> suitableResults = new ArrayList<>();
-        int maxCount = 0;
+        Supplier<TreeSet<Searchable>> supplier = () -> new TreeSet<>((o1, o2) -> o1.getObjectName().compareTo(o2.getObjectName()));
 
-        for (Searchable obj : searchableObjects) {
-            if (obj != null) {
-                String searchTerm = obj.getSearchTerm();
-                int count = 0;
-                int fromIndex = 0;
+        TreeSet<Searchable> suitableResults = searchableObjects.stream()
+                .filter(obj -> obj != null)
+                .map(obj -> {
+                    String searchTerm = obj.getSearchTerm();
+                    int count = 0;
+                    int fromIndex = 0;
 
-                while ((fromIndex = searchTerm.indexOf(search, fromIndex)) != -1) {
-                    count++;
-                    fromIndex += search.length();
-                }
+                    while ((fromIndex = searchTerm.indexOf(search, fromIndex)) != -1) {
+                        count++;
+                        fromIndex += search.length();
+                    }
 
-                if (count > maxCount) {
-                    maxCount = count;
-                    suitableResults.clear();
-                    suitableResults.add(obj);
-                } else if (count == maxCount) {
-                    suitableResults.add(obj);
-                }
-            }
-        }
+                    return new AbstractMap.SimpleEntry<>(obj, count);
+                })
+                .collect(Collectors.groupingBy(Map.Entry::getValue, Collectors.toList()))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByKey())
+                .map(Map.Entry::getValue)
+                .orElse(new ArrayList<>())
+                .stream()
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toCollection(supplier));
 
-        return suitableResults;
+        return new ArrayList<>(suitableResults);
     }
 }
+
+
+
