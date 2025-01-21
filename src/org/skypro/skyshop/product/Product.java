@@ -3,8 +3,12 @@ package org.skypro.skyshop.product;
 import org.skypro.skyshop.notFoundAndSedrch.Searchable;
 import java.util.Objects;
 
+
+  public abstract class Product implements Searchable{
+    public final String productName ;
 public abstract class Product implements Searchable {
     public final String productName;
+
 
     public Product(String productName) {
         if (productName == null || productName.isBlank()) {

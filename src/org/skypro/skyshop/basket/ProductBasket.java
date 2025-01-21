@@ -3,9 +3,9 @@ package org.skypro.skyshop.basket;
 import org.skypro.skyshop.product.Product;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class ProductBasket {
@@ -21,11 +21,9 @@ public class ProductBasket {
     }
 
     public int calculateBasketCost() {
-        int sum = 0;
-        for (Map.Entry<Product, Integer> entry : basket.entrySet()) {
-            sum += entry.getKey().getPrice() * entry.getValue();
-        }
-        return sum;
+        return basket.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
+                .sum();
     }
 
     public void printBasket() {
@@ -33,28 +31,22 @@ public class ProductBasket {
             System.out.println("Корзина пуста!");
             return;
         }
-        int sum = calculateBasketCost();
-        for (Map.Entry<Product, Integer> entry : basket.entrySet()) {
-            System.out.println(entry.getKey() + " (Quantity: " + entry.getValue() + ")");
-        }
-        System.out.println("Итого: " + sum);
+        int totalCost = calculateBasketCost();
+        basket.forEach((product, quantity) -> System.out.println(product + " (Quantity: " + quantity + ")"));
+        System.out.println("Итого: " + totalCost);
     }
 
     public List<Product> removeProductsByName(String searchCriteria) {
         List<Product> removedProducts = new ArrayList<>();
-        Iterator<Map.Entry<Product, Integer>> basketIterator = basket.entrySet().iterator();
-        while (basketIterator.hasNext()) {
-            Map.Entry<Product, Integer> entry = basketIterator.next();
+        basket.entrySet().removeIf(entry -> {
             Product product = entry.getKey();
             if (product != null && product.getProductName().toLowerCase().replace(" ", "").contains(searchCriteria.toLowerCase().replace(" ", ""))) {
                 removedProducts.add(product);
-                if (entry.getValue() > 1) {
-                    basket.put(product, entry.getValue() - 1);
-                } else {
-                    basketIterator.remove();
-                }
+                return true;
             }
-        }
+            return false;
+        });
+
         return removedProducts;
     }
 }
